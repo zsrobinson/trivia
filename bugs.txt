@@ -1,0 +1,1 @@
+- When starting on teamA, it bolds teamB for some reason

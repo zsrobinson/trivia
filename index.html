@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Trivia Game</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp">
+	<link rel="icon" href="assets\favicon.png" type="image/png" sizes="16x16">
+
+  </head>
+  <body>
+    
+	<div id="setup">
+		<div class="show center">
+			<h1>Trivia Game</h1>
+
+			<label for="teamANameInput">Team 1 name: </label>
+			<input autocomplete="off" type="text" id="teamANameInput" name="teamANameInput"><br>
+			<label for="teamBNameInput">Team 2 name: </label>
+			<input autocomplete="off" type="text" id="teamBNameInput" name="teamBNameInput"><br><br>
+			<button class="startUpButton" onclick="setup(true);">Start</button>
+			<!-- <button class="startUpButton" onclick="setup(false);">Skip</button> -->
+			<button class="startUpButton" onclick="info();">Info</button>
+
+		</div>
+	</div>
+
+	<div id="info">
+		<div class="show center">
+			<h1>About This Game</h1>
+			<p>Random Trivia Questions will appear on screen. According to whichever team's scoreboard is bolded with > < surrounding it will answer. After answering the question, the host will click the question to reveal the answer. At this point, the host presses the check if they got it correct, the x if they got it wrong, or the arrow if they don't believe it was a fair question and would like to skip it.</p>
+			<p>Created by Zachary Robinson</p>
+			<p>Trivia Questions from randomtriviagenerator.com</p>
+			<p>Icons from Material Design</p>
+			<p>SFX from Bertrof on freesound.org</p>
+			<p>This website is licensed under CC BY-NC-SA 4.0</p>
+		</div>
+	</div>
+
+	<div id="game">
+
+		<div class="show question" onclick="showAnswer();">
+			<div class="categorySameLine">
+				<span id="categoryIcon" class="material-icons-two-tone md-cat">sentiment_satisfied_alt</span>
+				<p id="category"></p>
+			</div>
+			<p id="card"></p>
+		</div>
+
+		<div class="show teamA">
+			<p id="teamA">Team A: </p>
+		</div>
+		<div class="show teamB">
+			<p id="teamB">Team B: </p>
+		</div>
+
+		<div class="buttons">
+
+			<button onclick="wrongAnswer();" class="iconButton">
+				<span class="material-icons-two-tone md-l">cancel</span>
+			</button>
+
+			<button onclick="correctAnswer();" class="iconButton">
+				<span class="material-icons-two-tone md-xl">check_circle</span>
+			</button>
+
+			<button onclick="skipAnswer();" class="iconButton">
+				<span class="material-icons-two-tone md-l">next_plan</span>
+			</button>
+
+		</div>
+
+	</div>
+
+	<script src="script.js"></script>
+
+  </body>
+</html>
