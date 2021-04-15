@@ -1,7 +1,6 @@
 // Startup
 
 document.getElementById("game").style.display = "none";
-document.getElementById("info").style.display = "none";
 
 let teamA, teamB, turn;
 
@@ -62,19 +61,11 @@ function setup(customNames) {
 
 	// show game, hide Setup
 	document.getElementById("setup").style.display = "none";
-	document.getElementById("info").style.display = "none";
 	document.getElementById("game").style.display = "block";
-}
-
-function info() {
-	document.getElementById("setup").style.display = "none";
-	document.getElementById("info").style.display = "block";
-	document.getElementById("game").style.display = "none";
 }
 
 function begin() {
 	document.getElementById("setup").style.display = "block";
-	document.getElementById("info").style.display = "none";
 	document.getElementById("game").style.display = "none";
 }
 
@@ -190,15 +181,13 @@ function newQuestion() {
 			card.answer = obj.answer;
 			card.category = obj.categories[0];
 
-			console.log(icons[card.category])
-
 			document.getElementById("card").innerHTML = card.question;
 			document.getElementById("category").innerHTML = capitalize(card.category);
 			document.getElementById("categoryIcon").innerHTML = icons[card.category];
 			card.answerShowing = false;
 
 		} else {
-			console.log("request error");
+			console.log("ERROR: Unable to fetch new question");
 		}
 	}
 	request.send();
