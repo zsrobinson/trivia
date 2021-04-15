@@ -1,5 +1,9 @@
 # Random Trivia Game
 
+Visit Project: https://zsrobinson.github.io/trivia/
+
+## About This Project
+
 Hi, thanks for showing interest in my project!
 
 This is just a little fun game to play that I developed in March 2021. It's intended to be used on a video call, with one person (let's call them the host) sharing their screen and interacting with the website. However, this could be used in a variety of settings. This is my first time putting something out there on GitHub.
