@@ -46,16 +46,16 @@ function setup(customNames) {
 		teamB = new Team("Team B");
 	}
 
-	// startup functions
-	newQuestion();
-	updateScore();
-
 	// randomly decides who goes first
 	if (Math.random() >= 0.5) {
 		turn = "teamA"
 	} else {
 		turn = "teamB"
 	}
+
+	// startup functions
+	newQuestion();
+	updateScore();
 
 	setColor()
 
