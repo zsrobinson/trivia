@@ -1,194 +1,205 @@
-// Startup
+let currentSet = {};
+let currentIndex;
+let currentTeam;
 
-document.getElementById("game").style.display = "none";
+let teams = {
+	teamA: { points: 0, name: "" },
+	teamB: { points: 0, name: "" },
+};
 
-let teamA, teamB, turn;
-
-function Team(name) {
-	this.points = 0;
-	this.name = name;
-}
-
-setColor()
-
-var card = {
-	question: "",
-	answer: "",
-	category: "",
-	answerShowing: false
-}
-
-var correctSFX = new Audio('assets/correct.mp3');
-var incorrectSFX = new Audio('assets/incorrect.mp3');
-
-
-// Setup Buttons
-
-function setup(customNames) {
-
-	// set the team names
-	if (customNames) {
-		var teamAWantedName = document.getElementById("teamANameInput").value;
-		var teamBWantedName = document.getElementById("teamBNameInput").value;
-
-		if (teamAWantedName == "") {
-			teamAWantedName = "Team A";
+async function getData() {
+	try {
+		// fetches the data
+		// limit value must be 2 or greater
+		const response = await fetch("https://www.randomtriviagenerator.com/questions?limit=256");
+		// converts to json
+		const obj = await response.json();
+		// converts to simplified array
+		let output = [];
+		for (let i = 0; i < obj.length; i++) {
+			let element = {
+				question: obj[i].question,
+				answer: obj[i].answer,
+				category: obj[i].categories[0]
+			};
+			output.push(element);
 		}
-
-		if (teamBWantedName == "") {
-			teamBWantedName = "Team B";
-		}
-
-		teamA = new Team(teamAWantedName);
-		teamB = new Team(teamBWantedName);
-	} else {
-		teamA = new Team("Team A");
-		teamB = new Team("Team B");
+		// output
+		console.log("Fetching new questions from randomtriviagenerator.com")
+		return output;
+	} catch {
+		// creates the link
+		let link = "questions/set" + Math.floor(Math.random()*256) + ".txt";
+		// fetches the data
+		const response = await fetch(link);
+		// converts to json
+		const sets = await response.json();
+		// output
+		console.log("Fetching new questions from predefined folder")
+		return sets;
 	}
-
-	// randomly decides who goes first
-	if (Math.random() >= 0.5) {
-		turn = "teamA"
-	} else {
-		turn = "teamB"
-	}
-
-	// startup functions
-	newQuestion();
-	updateScore();
-
-	setColor()
-
-	// show game, hide Setup
-	document.getElementById("setup").style.display = "none";
-	document.getElementById("game").style.display = "block";
-}
-
-function begin() {
-	document.getElementById("setup").style.display = "block";
-	document.getElementById("game").style.display = "none";
-}
-
-
-
-// Buttons
-
-function correctAnswer() {
-	correctSFX.play();
-
-	if (turn == "teamA") { teamA.points++ }
-	else if (turn == "teamB") { teamB.points++ }
-	updateScore()
-	//toggleTurn()
-	newQuestion()
-}
-
-function wrongAnswer() {
-	incorrectSFX.play();
-
-	toggleTurn()
-	newQuestion()
-	updateScore()
-}
-
-function skipAnswer() {
-	newQuestion()
-}
-
-function showAnswer() {
-	if (card.answerShowing) {
-		document.getElementById("card").innerHTML = card.question;
-		card.answerShowing = false;
-	} else {
-		document.getElementById("card").innerHTML = card.answer;
-		card.answerShowing = true;
-	}
-}
-
-
-
-// Other Functions
-
-function setColor() {
-	let color1, color2;
-	if (turn == "teamA") {
-		color1 = "#103783";
-		color2 = "#9bafd9";
-	} else if (turn == "teamB") {
-		color1 = "#C02425";
-		color2 = "#F0CB35";
-	} else {
-		color1 = "#232526";
-		color2 = "#414345";
-	}
-
-	let body = document.querySelector("body");
-	body.style.backgroundImage = "linear-gradient(to top right, " + color1 + " , " + color2 + ")"
-}
-
-function toggleTurn() {
-	if (turn == "teamA") { turn = "teamB"; }
-	else if (turn == "teamB") { turn = "teamA"; }
-}
-
-function updateScore() {
-	let teamAOutput, teamBOutput = "";
-	if (turn == "teamA") {
-		teamAOutput = "<b>> " + teamA.name + " <</b><br>" + teamA.points;
-		teamBOutput = teamB.name + ":<br> " + teamB.points;
-	} else {
-		teamAOutput = teamA.name + ":<br>" + teamA.points;
-		teamBOutput = "<b>> " + teamB.name + " <</b><br>" + teamB.points;
-	}
-
-	if (teamA.points == 1) { teamAOutput += " point"}
-	else  { teamAOutput += " points"}
-
-	if (teamB.points == 1) { teamBOutput += " point"}
-	else  { teamBOutput += " points"}
-
-	document.getElementById("teamA").innerHTML = teamAOutput;
-	document.getElementById("teamB").innerHTML = teamBOutput;
-}
-
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-var icons = {
-	arts: "auto_stories",
-	geography: "public",
-	entertainment: "theater_comedy",
-	history: "history_edu",
-	science: "biotech",
-	general: "sentiment_satisfied_alt"
 }
 
 function newQuestion() {
-	setColor();
+	hide("answer");
+	show("answerButton");
+	if (currentSet.length > 0) {
+		// if there are questions, update screen
 
-	//console.log("requesting")
-	link = "https://www.randomtriviagenerator.com/questions?limit=1";
-	// backup: https://jservice.io/api/random
-	// backup: https://opentdb.com/api.php?amount=1
-	var request = new XMLHttpRequest();
-	request.open('GET', link, true);
-	request.onload = function () {
-		var obj = JSON.parse(this.response);
-		if (request.status >= 200 && request.status < 400) {
+		currentIndex = Math.floor(Math.random()*currentSet.length);
 
-			card.question = obj.question;
-			card.answer = obj.answer;
-			card.category = obj.categories[0];
+		console.log(`Displaying question ${currentIndex}. There are ${currentSet.length-1} questions left.`)
 
-			document.getElementById("card").innerHTML = card.question;
-			document.getElementById("category").innerHTML = capitalize(card.category);
-			document.getElementById("categoryIcon").innerHTML = icons[card.category];
-			card.answerShowing = false;
+		document.getElementById("question").innerHTML = currentSet[currentIndex]["question"];
+		document.getElementById("answer").innerHTML = currentSet[currentIndex]["answer"];
+		document.getElementById("categoryText").innerHTML = currentSet[currentIndex]["category"].charAt(0).toUpperCase() + currentSet[currentIndex]["category"].slice(1);
+		document.getElementById("categoryIcon").src = "assets/categories/" + currentSet[currentIndex]["category"] + ".svg";
 
-		} else {
-			console.log("ERROR: Unable to fetch new question");
-		}
+		currentSet.splice(currentIndex, 1);
+
+	} else {
+		// otherwise, get a set of questions and try again
+		getData().then(array => {
+			currentSet = array;
+			currentIndex = -1;
+			newQuestion();
+		});
 	}
-	request.send();
 }
+
+function numToPoints(number) {
+	let suffix;
+	if (number == 1) { suffix = " point"}
+	else { suffix = " points"}
+	return number + suffix;
+}
+
+
+
+//CSS Animation functions
+
+function shrink(name) {
+	let target = document.getElementById(name)
+	try { target.classList.remove("grow"); }
+	finally { target.classList.add("shrink"); }
+}
+
+function grow(name) {
+	let target = document.getElementById(name)
+	try { target.classList.remove("shrink"); }
+	finally { target.classList.add("grow"); }
+}
+
+function show(name) {
+	let target = document.getElementById(name)
+	target.style.display = "block";
+}
+
+function hide(name) {
+	let target = document.getElementById(name)
+	target.style.display = "none";
+}
+
+/* function flyIn() {
+	let target = document.getElementsByClassName("question")[0]
+	try { target.classList.remove("flyOut"); }
+	finally { target.classList.add("flyIn"); }
+}
+
+function flyOut() {
+	let target = document.getElementsByClassName("question")[0]
+	try { target.classList.remove("flyIn"); }
+	finally { target.classList.add("flyOut"); }
+} */
+
+
+// correct button
+
+document.getElementById("correctButton").addEventListener("click", function () {
+	if (currentTeam == "teamA") {
+		teams.teamA.points++;
+	} else if (currentTeam == "teamB") {
+		teams.teamB.points++;
+	}
+
+	// display team points
+	document.getElementById("teamAPoints").innerHTML = numToPoints(teams.teamA.points);
+	document.getElementById("teamBPoints").innerHTML = numToPoints(teams.teamB.points);
+
+	newQuestion();
+
+})
+
+
+
+// setup
+
+newQuestion();
+
+if (Math.floor(Math.random()*2) == 0) {
+	currentTeam = "teamA";
+	shrink("teamB");
+} else {
+	currentTeam = "teamB";
+	shrink("teamA");
+}
+
+
+
+// wrong button
+
+document.getElementById("wrongButton").addEventListener("click", function () {
+
+	newQuestion();
+
+	if (currentTeam == "teamA") {
+		currentTeam = "teamB";
+		shrink("teamA");
+		grow("teamB");
+	} else if (currentTeam == "teamB") {
+		currentTeam = "teamA";
+		shrink("teamB");
+		grow("teamA");
+	}
+
+});
+
+
+
+// skip button
+
+document.getElementById("skipButton").addEventListener("click", function () {
+	newQuestion();
+});
+
+
+
+// start button
+
+document.getElementById("startButton").addEventListener("click", function () {
+
+	// get values from name inputs
+	teams.teamA.name = document.getElementById("teamANameInput").value;
+	teams.teamB.name = document.getElementById("teamBNameInput").value;
+
+	// set values for names if blank
+	if (teams.teamA.name == "") { teams.teamA.name = "Team A"; }
+	if (teams.teamB.name == "") { teams.teamB.name = "Team B"; }
+
+	// display team points
+	document.getElementById("teamAPoints").innerHTML = numToPoints(teams.teamA.points);
+	document.getElementById("teamBPoints").innerHTML = numToPoints(teams.teamB.points);
+
+	// display team names
+	document.getElementById("teamAName").innerHTML = teams.teamA.name;
+	document.getElementById("teamBName").innerHTML = teams.teamB.name;
+
+	// switch screens
+	document.getElementsByClassName("setup")[0].style.display = "none";
+	document.getElementsByClassName("game")[0].style.display = "grid";
+});
+
+document.getElementById("answerButton").addEventListener("click", function () {
+	show("answer");
+	hide("answerButton");
+});

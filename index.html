@@ -1,68 +1,85 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Trivia Game</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+<html lang="en">
 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp">
-	<link rel="icon" href="assets\favicon.png" type="image/png" sizes="16x16">
+<head>
 
-  </head>
-  <body>
-    
-	<div id="setup">
-		<div class="show center">
-			<h1>Trivia Game</h1>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Trivia v2</title>
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"/>
+	<link href="style.css" rel="stylesheet" type="text/css" />
 
-			<label for="teamANameInput">Team 1 name: </label>
-			<input autocomplete="off" type="text" id="teamANameInput" name="teamANameInput"><br>
-			<label for="teamBNameInput">Team 2 name: </label>
-			<input autocomplete="off" type="text" id="teamBNameInput" name="teamBNameInput"><br><br>
-			<button class="startUpButton" onclick="setup(true);">Start</button>
-			<button class="startUpButton" onclick="window.location.href='https://github.com/zsrobinson/trivia';">Info</button>
+	<!-- Generated on https://favicon.io/favicon-converter/ -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/site.webmanifest">
 
+</head>
+
+<body>
+
+	<div class="setup">
+		<h1>Trivia Game</h1>
+
+		<p>Created By Zachary Robinson</p>
+
+		<label for="teamANameInput">Team A name: </label>
+		<input autocomplete="off" type="text" id="teamANameInput" name="teamANameInput">
+
+		<label for="teamBNameInput">Team B name: </label>
+		<input autocomplete="off" type="text" id="teamBNameInput" name="teamBNameInput">
+
+		<div class="homeScreenButtons">
+			<button id="startButton">Start</button>
+			<button onclick="window.location.href='https://www.github.com/zsrobinson/trivia';">Info</button>
 		</div>
+	
 	</div>
 
-	<div id="game">
+	<div class="game">
 
-		<div class="show question" onclick="showAnswer();">
-			<div class="categorySameLine">
-				<span id="categoryIcon" class="material-icons-two-tone md-cat">sentiment_satisfied_alt</span>
-				<p id="category"></p>
+		<div class="question">
+
+			<div class="category">
+				<img id="categoryIcon" src="assets/categories/general.svg">
+				<p id="categoryText">This is the category!</p>
 			</div>
-			<p id="card"></p>
+
+			<p id="question">This is the question!</p>
 		</div>
 
-		<div class="show teamA">
-			<p id="teamA">Team A: </p>
+		<div class="answer">
+			<button id="answerButton">Reveal Answer</button>
+			<p id="answer"></p>
 		</div>
-		<div class="show teamB">
-			<p id="teamB">Team B: </p>
+
+		<div class="teamA" id="teamA">
+			<h1 id="teamAName">Sun Valley</h1>
+			<p id="teamAPoints">0 points</p>
+		</div>
+
+		<div class="teamB" id="teamB">
+			<h1 id="teamBName">Spring Valley</h1>
+			<p id="teamBPoints">0 points</p>
 		</div>
 
 		<div class="buttons">
-
-			<button onclick="wrongAnswer();" class="iconButton">
-				<span class="material-icons-two-tone md-l">cancel</span>
+			<button id="correctButton">
+				<img src="assets/buttons/correct.svg">
 			</button>
-
-			<button onclick="correctAnswer();" class="iconButton">
-				<span class="material-icons-two-tone md-xl">check_circle</span>
+			<button id="wrongButton">
+				<img src="assets/buttons/wrong.svg">
 			</button>
-
-			<button onclick="skipAnswer();" class="iconButton">
-				<span class="material-icons-two-tone md-l">next_plan</span>
+			<button id="skipButton">
+				<img src="assets/buttons/skip.svg">
 			</button>
-
 		</div>
 
 	</div>
 
 	<script src="script.js"></script>
+	
+</body>
 
-  </body>
 </html>

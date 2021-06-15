@@ -1,144 +1,239 @@
-body {
-	background-image: linear-gradient(to top right, #C02425 , #F0CB35);
-	background-attachment: fixed;
-}
+/* High level stuff */
 
-h1, p, label, button, input, a, body {
-	margin-block-start: 0em;
-    margin-block-end: 0px;
-	color: rgb(46, 46, 46);
-	font-family: "Lato";
-}
-p, label, button, input, a, body {
-	font-size:2vw;
-	font-weight: normal;
-}
-h1 {
-	font-size: 3vw;
-	font-weight: bold;
-	text-align: center;
-}
-input {
-	margin: 5px;
-	padding: 5px 10px;
-}
-
-.show {
-	position: absolute;
+* {
 	box-sizing: border-box;
-	border: 5px solid #ffffff48;
-	padding: 2vw;
-	border-radius: 2vw;
-	background-color: #ffffffa8;
-	box-shadow: 0px 0px 15px 15px #ffffff6c;
-	
+	padding: 0;
+	margin: 0;
 }
 
-.center {
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	text-align: center;
+
+
+/* Generated on https://www.gradient-animator.com/ */
+body {
+	background: linear-gradient(221deg, #d9ed92, #76c893, #168aad, #184e77);
+	/* alternative gradient-- background: linear-gradient(221deg, #ffbe0b, #fb5607, #ff006e, #8338ec, #3a86ff); */
+	background-size: 200% 200%;
+	background-attachment: fixed;
+	animation: bgGradient 60s ease-in-out infinite;
 }
 
-.question {
-	left: 25%;
-	top: 5%;
-
-	width: 50%;
-	height: 60%;
-	text-align: center;
-}
-#card {
-	font-size: 3vw;
-	font-weight: bold;
-	margin-block-start: .5em;
+@keyframes bgGradient {
+	0%{background-position:0% 50%}
+	50%{background-position:100% 50%}
+	100%{background-position:0% 50%}
 }
 
-.teamA {
-	left: 5%;
-	top: 75%;
-
-	width: 25%;
-	height: 20%;
-
-	display: flex;
-  	justify-content: center;
-  	align-items: center;
-	text-align: center;
+p, button, h1, label, input {
+	font-size: 20px;
+	font-family: Lato;
+	color: #323232;
 }
-.teamB {
-	right: 5%;
-	top: 75%;
 
-	width: 25%;
-	height: 20%;
-
-	display: flex;
-  	justify-content: center;
-  	align-items: center;
-	text-align: center;
-}
-.buttons {
-	left: 35%;
-	top: 75%;
-
-	width: 30%;
-	height: 20%;
-
+.setup {
+	display: block;
 	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50%;
+	height: 50%;
+}
 
+
+
+/* CSS Grid Styling */
+
+.game {
+	width: 100vw;
+	height: 100vh;
+	margin: auto;
+
+	display: grid;
+	gap: 50px;
+	padding: 50px;
+	grid-template-columns: 2fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-areas:
+		"question	teamA"
+		"question	teamB"
+		"answer		buttons";
+
+	min-height: 0;  /* NEW */
+	min-width: 0;   /* NEW; needed for Firefox */
+
+}
+.game > div , .setup {
+	text-align: center;
 	display: flex;
-  	justify-content: center;
-  	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	background-color: #ffffffa8;
+	padding: 20px;
+	border: 5px solid #ffffff48;
+	border-radius: 20px;
+	box-shadow: 0px 0px 10px 10px #ffffff6c;
+
+	overflow: hidden;  /* NEW */
+ 	min-width: 0;	  /* NEW; needed for Firefox */
+}
+
+.question { grid-area: question; }
+.answer { grid-area: answer; }
+.teamA { grid-area: teamA; }
+.teamB { grid-area: teamB; }
+.buttons { grid-area: buttons; }
+
+.buttons , .category {
+	display: flex;
+	align-items: center;
+	flex-direction: row !important;
+}
+
+
+
+/* Button Styling */
+
+.buttons > button {
+	background-color: #ffffff00;
+	border: none;
+	padding: 10px;
+}
+
+.buttons > button > img {
+	filter: invert(15%) sepia(6%) saturate(6%) hue-rotate(316deg) brightness(101%) contrast(88%);
+	width: 64px;
+	height: auto;
+}
+
+
+
+/* Team Animation Styling */
+
+@keyframes shrink {
+	from { margin: 0%; background-color: #ffffffa8; }
+	to { margin: 10%; background-color: #ffffff70; }
+}
+.shrink {
+	animation: shrink 1s ease-in-out 0s forwards;
+}
+
+@keyframes grow {
+	from { margin: 10%; background-color: #ffffff70; }
+	to { margin: 0%; background-color: #ffffffa8; }
+}
+.grow {
+	animation: grow 1s ease-in-out 0s forwards;
+}
+
+
+
+
+@keyframes flyOut {
+	from { transform: translate(0px, 0px); }
+	to { transform: translate(0px, -100vh); }
+}
+.flyOut {
+	animation: flyOut 1s ease-in-out 0s forwards;
+}
+
+@keyframes flyIn {
+	from { transform: translate(0px, -100vh); }
+	to { transform: translate(0px, 0px); }
+}
+.flyIn {
+	animation: flyIn 1s ease-in-out 0s forwards;
+}
+
+
+
+/* Text Styling and other*/
+
+.question > p, .setup > h1 {
+	font-size: 48px;
+	font-weight: bold;
+}
+.teamA > h1, .teamB > h1 {
+	font-size: 36px;
+	font-weight: bold;
+}
+.answer > p {
+	font-size: 36px;
+	font-weight: bold;
+}
+.category > p {
+	font-size: 28px;
+}
+.category > img {
+	/* Generated on https://codepen.io/sosuke/pen/Pjoqqp */
+	filter: invert(15%) sepia(6%) saturate(6%) hue-rotate(316deg) brightness(101%) contrast(88%);
+	width: 32px;
+	height: auto;
+	margin: 10px;
+}
+.question {
+	display: absolute;
+}
+
+#answer {
+	display: none;
 }
 
 button {
-	background-color: rgba(255, 255, 255, 0.5);
-	border: none;
-	padding: 5px 10px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 3vw;
+	border: 5px solid #323232;
+	padding: 15px;
+	border-radius: 20px;
+	background-color: #32323223;
 }
 
-.iconButton {
-	background-color: rgba(255, 255, 255, 0);
-	color: white;
-	border: none;
-	padding: 0px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-
-	
-
+button:hover{
+	background-color: #3232325d;
 }
-
-.material-icons-two-tone.md-l {
-	font-size: 5vw;
-	filter: invert(100);
+label {
+	margin: 5px;
+	margin-top: 10px;
+	font-weight: bold;
 }
-
-.material-icons-two-tone.md-xl {
-	font-size: 7vw;
-	filter: invert(100);
-}
-
-.material-icons-two-tone.md-cat {
-	color: rgb(46, 46, 46);
-	font-size: 2vw;
+input {
 	padding: 5px;
-}
-
-.categorySameLine {
-	display: flex;
-  	justify-content: center;
-  	align-items: center;
-	text-align: center;
-}
-
-.startUpButton {
 	margin: 5px;
 }
+
+.homeScreenButtons {
+	display: flex;
+	flex-direction: row;
+}
+.homeScreenButtons > button {
+	margin: 10px;
+}
+.homeScreenButtons > #startButton {
+	font-weight: bold;
+}
+
+
+/* Breakpoints */
+
+@media (min-width: 1200px) {
+	.game {
+		width: 75vw;
+		height: 100vh;
+		margin: auto;
+	}
+}
+
+/* @media (max-width: 800px) {
+	.game {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr 1fr;
+		grid-template-areas:
+			"question	question"
+			"answer		answer"
+			"buttons	buttons"
+			"teamA		teamB";
+	}
+} */
+
+/* other */
+
+.game { display: none; }
