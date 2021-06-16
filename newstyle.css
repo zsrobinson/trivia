@@ -1,0 +1,174 @@
+/*  TABLE OF CONTENTS
+
+	1. GLOBAL STYLES
+	2. LAYOUT
+	3. TYPOGRAPHY
+	4. COMPONENTS
+		4.1. BUTTONS
+		4.2. FORMS 
+		4.3. ICONS
+	5. OTHER */
+
+/*  ====================
+	  1. GLOBAL STYLES
+	====================  */
+
+* {
+	box-sizing: border-box;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* text defaults */
+html, input, button {
+	font-family: Lato;
+	font-size: 20px;
+	color: #323232;
+}
+
+/* scrolling background gradient */
+body {
+	background: linear-gradient(221deg, #d9ed92, #76c893, #168aad, #184e77);
+	background-size: 200% 200%;
+	background-attachment: fixed;
+	animation: bgGradient 10s ease-in-out infinite;
+}
+@keyframes bgGradient {
+	0% { background-position: 0% 50% }
+	50% { background-position: 100% 50% }
+	100% { background-position: 0% 50% }
+}
+
+/*  =============
+	  2. LAYOUT
+	=============  */
+
+.columns {}
+.columns-category {}
+.columns-setup {}
+
+.page {}
+.page-home {}
+.page-game {
+	width: 100vw;
+	height: 100vh;
+	margin: auto;
+
+	display: grid;
+	gap: 50px;
+	padding: 50px;
+	grid-template-columns: 2fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-areas:
+		"question	team-a"
+		"question	team-b"
+		"answer		buttons";
+
+	overflow: hidden;  /* NEW */
+	min-width: 0;	  /* NEW; needed for Firefox */
+}
+
+.box {
+	background-color: #ffffff55;
+	padding: 1rem 2rem;
+	border: 0.25rem solid #ffffff7f;
+	border-radius: 1rem;
+	text-align: center;
+	display: inline-block;
+}
+.box-setup {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.box-question { grid-area: question }
+.box-answer { grid-area: answer }
+.box-team-a { grid-area: team-a }
+.box-team-b { grid-area: team-b }
+.box-buttons { grid-area: buttons }
+
+/*  =================
+	  3. TYPOGRAPHY
+	=================  */
+
+.title {
+	font-size: 2rem;
+	font-weight: bold;
+}
+.subtitle {
+	font-size: 1rem;
+	font-weight: bold;
+	padding-bottom: 1rem;
+}
+
+.header {}
+
+.text {}
+.text-category {}
+.text-question {}
+.text-answer {}
+.text-points {}
+
+/*  =================
+	  4. COMPONENTS
+	=================  */
+
+/*  4.1. BUTTONS  */
+
+.button {
+	font-size: 1rem;
+	padding: 0.25rem 1rem;
+	border: 0.1rem solid #3232327f;
+	border-radius: 0.5rem;
+	background-color: #ffffff75;
+	font-weight: bold;
+	margin-top: 0.5rem;
+	margin-right: 0.5rem;
+}
+.button:hover {
+	background-color: #ffffff9d;
+}
+.button-setup {}
+.button-answer {}
+.button-large {}
+
+/*  4.2. FORMS  */
+
+.label {
+	font-size: 1rem;
+}
+.label-setup {}
+
+.input {
+	font-size: 1rem;
+	padding: 0.25rem 0.5rem;
+	width: 8rem;
+	border: 0.1rem solid #3232327f;
+	/* border-radius: 0.5rem; */
+	background-color: #ffffff9d;
+	margin-bottom: 0.5rem;
+	margin-left: 0.25rem;
+}
+.input-setup {}
+
+/*  4.3. ICONS  */
+
+.icon {
+	filter: invert(15%) sepia(6%) saturate(6%) hue-rotate(316deg) brightness(101%) contrast(88%);
+}
+.icon-category {
+	width: 1.5rem;
+}
+.icon-large {
+	width: 3rem;
+}
+
+/*  ============
+	  5. OTHER
+	============  */
+
+.page-game {
+	display: none;
+}
