@@ -1,103 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Random Trivia Game</title>
+		<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+		<link href="style.css" rel="stylesheet" type="text/css" />
 
-<head>
+		<!-- Generated on https://favicon.io/favicon-converter/ -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png" />
+		<link rel="manifest" href="/assets/favicon/site.webmanifest" />
+	</head>
 
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Random Trivia Game</title>
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"/>
-	<link href="style.css" rel="stylesheet" type="text/css" />
-
-	<!-- Generated on https://favicon.io/favicon-converter/ -->
-	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
-	<link rel="manifest" href="/assets/favicon/site.webmanifest">
-
-</head>
-
-<body>
-
-	<div class="page page-home" id="page-home">
-
-		<div class="box box-setup">
-		
-			<h1 class="title">Random Trivia Game</h1>
-			<h2 class="subtitle">Created By Zachary Robinson</h2>
-			
-			<label class="label label-setup" for="teamANameInput">Team A name: </label>
-			<input class="input input-setup" name="teamANameInput" id="teamANameInput" autocomplete="off" type="text">
-
-			<label class="label label-setup" for="teamBNameInput">Team B name: </label>
-			<input class="input input-setup" name="teamBNameInput" id="teamBNameInput" autocomplete="off" type="text">
-
-			<div class="columns">
-				<button class="button button-setup" id="button-setup-start">Start</button>
-				<button class="button button-setup" onclick="window.location.href='https://www.github.com/zsrobinson/trivia';">Learn More</button>
+	<body>
+		<div class="page page-home" id="page-home">
+			<div class="box box-setup">
+				<h1 class="title">Random Trivia Game</h1>
+				<h2 class="subtitle">Created By Zachary Robinson</h2>
+				<label class="label label-setup" for="teamANameInput">Team A name: </label>
+				<input class="input input-setup" name="teamANameInput" id="teamANameInput" autocomplete="off" type="text" />
+				<label class="label label-setup" for="teamBNameInput">Team B name: </label>
+				<input class="input input-setup" name="teamBNameInput" id="teamBNameInput" autocomplete="off" type="text" />
+				<div class="columns">
+					<button class="button button-setup" id="button-setup-start">Start</button>
+					<button class="button button-setup"
+						onclick="window.location.href='https://www.github.com/zsrobinson/trivia';"
+					>
+						Learn More
+					</button>
+				</div>
 			</div>
 		</div>
-	
-	</div>
 
-	<div class="page page-game" id="page-game">
+		<div class="page page-game" id="page-game">
+			<div class="box box-question">
+				<div class="columns columns-category">
+					<img class="icon icon-category" id="icon-category" src="assets/categories/general.svg" />
+					<p class="text text-category" id="text-category">This is the category!</p>
+				</div>
 
-		<div class="box box-question">
-
-			<div class="columns columns-category">
-				<img class="icon icon-category" id="icon-category" src="assets/categories/general.svg">
-				<p class="text text-category" id="text-category">This is the category!</p>
+				<p class="text text-question" id="text-question">This is the question!</p>
 			</div>
 
-			<p class="text text-question" id="text-question">This is the question!</p>
-
-		</div>
-
-		<div class="box box-answer">
-
-			<button class="button button-answer" id="button-answer">Reveal Answer</button>
-			<p class="text text-answer" id="text-answer">Answer Text</p>
-
-		</div>
-
-		<div class="box box-team-a" id="box-team-a">
-
-			<h2 class="header" id="header-team-a">TeamA Name</h1>
-			<p class="text text-points" id="text-points-team-a">TeamA Points</p>
-
-		</div>
-
-		<div class="box box-team-b" id="box-team-b">
-
-			<h2 class="header" id="header-team-b">TeamB Name</h1>
-			<p class="text text-points" id="text-points-team-b">TeamB Points</p>
-
-		</div>
-
-		<div class="box box-buttons">
-
-			<div class="columns">
-
-				<button class="button button-large" id="button-large-correct">
-					<img class="icon icon-large" src="assets/buttons/correct.svg">
-				</button>
-
-				<button class="button button-large" id="button-large-wrong">
-					<img class="icon icon-large" src="assets/buttons/wrong.svg">
-				</button>
-
-				<button class="button button-large" id="button-large-skip">
-					<img class="icon icon-large" src="assets/buttons/skip.svg">
-				</button>
-				
+			<div class="box box-answer">
+				<button class="button button-answer" id="button-answer">Reveal Answer</button>
+				<p class="text text-answer" id="text-answer">Answer Text</p>
 			</div>
 
+			<div class="box box-team-a" id="box-team-a">
+				<h2 class="header" id="header-team-a">TeamA Name</h2>
+				<p class="text text-points" id="text-points-team-a">TeamA Points</p>
+			</div>
+
+			<div class="box box-team-b" id="box-team-b">
+				<h2 class="header" id="header-team-b">TeamB Name</h2>
+				<p class="text text-points" id="text-points-team-b">TeamB Points</p>
+			</div>
+
+			<div class="box box-buttons">
+				<div class="columns">
+					<button class="button button-large" id="button-large-correct">
+						<img class="icon icon-large" src="assets/buttons/correct.svg" />
+					</button>
+
+					<button class="button button-large" id="button-large-wrong">
+						<img class="icon icon-large" src="assets/buttons/wrong.svg" />
+					</button>
+
+					<button class="button button-large" id="button-large-skip">
+						<img class="icon icon-large" src="assets/buttons/skip.svg" />
+					</button>
+				</div>
+			</div>
 		</div>
 
-	</div>
-
-	<script src="script.js"></script>
-	
-</body>
-
+		<script src="script.js"></script>
+	</body>
 </html>
