@@ -5,7 +5,7 @@
 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Trivia Game - Dev</title>
+	<title>Random Trivia Game</title>
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"/>
 	<link href="newstyle.css" rel="stylesheet" type="text/css" />
 
@@ -23,22 +23,23 @@
 
 		<div class="box box-setup">
 		
-			<h1 class="title">Trivia Game</h1>
+			<h1 class="title">Random Trivia Game</h1>
 			<h2 class="subtitle">Created By Zachary Robinson</h2>
+			
+			<!-- <div class="columns"> -->
+				<label class="label label-setup" for="teamANameInput">Team A name: </label>
+				<input class="input input-setup" name="teamANameInput" id="teamANameInput" autocomplete="off" type="text">
+			<!-- </div> -->
 
-			<label class="label label-setup" for="teamANameInput">Team A name: </label>
-			<input class="input input-setup" name="teamANameInput" id="teamANameInput" autocomplete="off" type="text" placeholder="Team A"><br>
+			<!-- <div class="columns"> -->
+				<label class="label label-setup" for="teamBNameInput">Team B name: </label>
+				<input class="input input-setup" name="teamBNameInput" id="teamBNameInput" autocomplete="off" type="text">
+			<!-- </div> -->
 
-			<label class="label label-setup" for="teamBNameInput">Team B name: </label>
-			<input class="input input-setup" name="teamBNameInput" id="teamBNameInput" autocomplete="off" type="text" placeholder="Team B">
-
-			<div class="columns columns-setup">
-
+			<div class="columns">
 				<button class="button button-setup" id="button-setup-start">Start</button>
 				<button class="button button-setup" onclick="window.location.href='https://www.github.com/zsrobinson/trivia';">Learn More</button>
-			
 			</div>
-
 		</div>
 	
 	</div>
@@ -81,20 +82,20 @@
 
 			<div class="columns">
 
-				<button class="button button-large" id="button-large-correct">Correct
+				<button class="button button-large" id="button-large-correct">
 					<img class="icon icon-large" src="assets/buttons/correct.svg">
 				</button>
 
-				<button class="button button-large" id="button-large-wrong">Wrong
+				<button class="button button-large" id="button-large-wrong">
 					<img class="icon icon-large" src="assets/buttons/wrong.svg">
 				</button>
 
-				<button class="button button-large" id="button-large-skip">Skip
+				<button class="button button-large" id="button-large-skip">
 					<img class="icon icon-large" src="assets/buttons/skip.svg">
 				</button>
 				
 			</div>
-			
+
 		</div>
 
 	</div>

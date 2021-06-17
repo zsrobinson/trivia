@@ -80,14 +80,14 @@ function numToPoints(number) {
 
 function shrink(name) {
 	let target = document.getElementById(name)
-	try { target.classList.remove("grow"); }
-	finally { target.classList.add("shrink"); }
+	try { target.classList.remove("box-grow"); }
+	finally { target.classList.add("box-shrink"); }
 }
 
 function grow(name) {
 	let target = document.getElementById(name)
-	try { target.classList.remove("shrink"); }
-	finally { target.classList.add("grow"); }
+	try { target.classList.remove("box-shrink"); }
+	finally { target.classList.add("box-grow"); }
 }
 
 function show(name) {

@@ -1,4 +1,6 @@
-/*  TABLE OF CONTENTS
+/*  =====================
+	  TABLE OF CONTENTS
+	=====================
 
 	1. GLOBAL STYLES
 	2. LAYOUT
@@ -7,7 +9,13 @@
 		4.1. BUTTONS
 		4.2. FORMS 
 		4.3. ICONS
-	5. OTHER */
+	5. ANIMATIONS
+	6. BREAKPOINTS
+	7. OTHER */
+
+
+
+
 
 /*  ====================
 	  1. GLOBAL STYLES
@@ -19,6 +27,8 @@
 	margin: 0px;
 }
 
+*:focus { outline: none }
+
 /* text defaults */
 html, input, button {
 	font-family: Lato;
@@ -26,37 +36,33 @@ html, input, button {
 	color: #323232;
 }
 
-/* scrolling background gradient */
-body {
-	background: linear-gradient(221deg, #d9ed92, #76c893, #168aad, #184e77);
-	background-size: 200% 200%;
-	background-attachment: fixed;
-	animation: bgGradient 10s ease-in-out infinite;
-}
-@keyframes bgGradient {
-	0% { background-position: 0% 50% }
-	50% { background-position: 100% 50% }
-	100% { background-position: 0% 50% }
-}
+
+
+
 
 /*  =============
 	  2. LAYOUT
 	=============  */
 
-.columns {}
-.columns-category {}
-.columns-setup {}
+.columns {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+/* .columns-category {}
+.columns-setup {} */
 
-.page {}
-.page-home {}
+/* .page {}
+.page-home {} */
 .page-game {
 	width: 100vw;
 	height: 100vh;
 	margin: auto;
 
 	display: grid;
-	gap: 50px;
-	padding: 50px;
+	gap: 2rem;
+	padding: 3rem;
 	grid-template-columns: 2fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	grid-template-areas:
@@ -69,16 +75,22 @@ body {
 }
 
 .box {
-	background-color: #ffffff55;
+	background-color: #ffffff7f;
 	padding: 1rem 2rem;
-	border: 0.25rem solid #ffffff7f;
+	border: 0.25rem solid #ffffffc0;
 	border-radius: 1rem;
 	text-align: center;
-	display: inline-block;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 .box-setup {
+	padding: 3rem 6rem;
+	margin: 1rem;
 	position: absolute;
-	top: 30%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -88,6 +100,14 @@ body {
 .box-team-a { grid-area: team-a }
 .box-team-b { grid-area: team-b }
 .box-buttons { grid-area: buttons }
+
+.box-buttons {
+	padding: 0rem;
+}
+
+
+
+
 
 /*  =================
 	  3. TYPOGRAPHY
@@ -103,13 +123,34 @@ body {
 	padding-bottom: 1rem;
 }
 
-.header {}
+.header {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
 
-.text {}
-.text-category {}
-.text-question {}
-.text-answer {}
-.text-points {}
+.text {
+	font-size: 1rem;
+	font-weight: normal;
+}
+.text-category {
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+.text-question {
+	margin-top: 1rem;
+	font-size: 2.5rem;
+	padding: 0rem 1rem;
+}
+.text-answer {
+	font-size: 2rem;
+}
+.text-points {
+	margin-top: 0.25rem;
+}
+
+
+
+
 
 /*  =================
 	  4. COMPONENTS
@@ -119,39 +160,61 @@ body {
 
 .button {
 	font-size: 1rem;
-	padding: 0.25rem 1rem;
 	border: 0.1rem solid #3232327f;
 	border-radius: 0.5rem;
 	background-color: #ffffff75;
 	font-weight: bold;
+	transition: all ease-in-out 100ms;
+}
+.button:hover,
+.button:focus {
+	background-color: #ffffffab;
+}
+
+.button-setup {
 	margin-top: 0.5rem;
 	margin-right: 0.5rem;
+	padding: 0.25rem 1rem;
 }
-.button:hover {
-	background-color: #ffffff9d;
+.button-answer {
+	padding: 0.5rem 2rem;
 }
-.button-setup {}
-.button-answer {}
-.button-large {}
+
+.button-large {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0.5rem;
+	margin: 0rem 0.1rem;
+	border: none;
+	background-color: #32323200;
+}
+.button-large:hover,
+.button-large:focus {
+	background-color: #3232323b;
+}
+
+
 
 /*  4.2. FORMS  */
 
 .label {
 	font-size: 1rem;
+	padding-bottom: .25rem;
 }
-.label-setup {}
+/* .label-setup {} */
 
 .input {
 	font-size: 1rem;
 	padding: 0.25rem 0.5rem;
-	width: 8rem;
+	width: 10rem;
 	border: 0.1rem solid #3232327f;
-	/* border-radius: 0.5rem; */
 	background-color: #ffffff9d;
-	margin-bottom: 0.5rem;
-	margin-left: 0.25rem;
+	margin: 0rem 0rem .5rem 0rem;
 }
-.input-setup {}
+/* .input-setup {} */
+
+
 
 /*  4.3. ICONS  */
 
@@ -160,15 +223,154 @@ body {
 }
 .icon-category {
 	width: 1.5rem;
+	margin-right: .5rem;
 }
 .icon-large {
-	width: 3rem;
+	width: 4rem;
 }
 
-/*  ============
-	  5. OTHER
-	============  */
 
+
+
+
+/*  ===============
+	  5. ANIMATIONS
+	===============  */
+
+/* scrolling background gradient */
+body {
+	background: linear-gradient(221deg, #d9ed92, #76c893, #168aad, #184e77);
+	background-size: 200% 200%;
+	background-attachment: fixed;
+	animation: bgGradient 10s ease-in-out infinite;
+}
+@keyframes bgGradient {
+	0% { background-position: 0% 50% }
+	50% { background-position: 100% 50% }
+	100% { background-position: 0% 50% }
+}
+
+/* shrink animation for team box*/
+@keyframes shrink {
+	from { margin: 0rem; background-color: #ffffff7f; }
+	to { margin: 1.5rem 2rem; background-color: #ffffff41; }
+}
+.box-shrink {
+	animation: shrink 1s ease-in-out 0s forwards;
+}
+
+/* grow animation for team box */
+@keyframes grow {
+	from { margin: 1.5rem 2rem; background-color: #ffffff41; }
+	to { margin: 0rem; background-color: #ffffff7f; }
+}
+.box-grow {
+	animation: grow 1s ease-in-out 0s forwards;
+}
+
+
+
+
+
+/*  ================
+	  6. BREAKPOINTS
+	================  */
+
+@media (min-width: 1400px) {
+	/* margin on sides for big screens */
+	.page-game {
+		width: 75vw;
+		height: 100vh;
+		margin: auto;
+	}
+}
+
+@media (max-width: 1000px) {
+	/* smaller buttons */
+	.icon-large {
+		width: 3rem;
+	}
+	.button-large {
+		padding: 0.25rem;
+	}
+
+	/* smaller question and answer text */
+	.text-question {
+		margin-top: 1rem;
+		font-size: 2rem;
+		padding: 0rem;
+	}
+	.text-answer {
+		font-size: 1.5rem;
+	}
+
+	/* change grid layout for mobile */
+	.page-game {
+		gap: 1.5rem;
+		padding: 2rem;
+	}
+}
+
+@media (max-width: 700px) {
+
+	/* change home page spacing */
+	.box-setup {
+		margin-top: 3rem;
+		position: static;
+		transform: translate(0%, 0%);
+	}
+
+	/* change grid layout for mobile */
+	.page-game {
+		gap: 1rem;
+		padding: 1rem;
+
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr 1fr;
+		grid-template-areas:
+			"team-a		team-b"
+			"question	question"
+			"answer		answer"
+			"buttons	buttons";
+	}
+
+	/* disable movement of animations, only change color */
+	@keyframes shrink {
+		from { margin: 0rem; background-color: #ffffff7f; }
+		to { margin: .5rem; background-color: #ffffff41; }
+	}
+	@keyframes grow {
+		from { margin: .5rem; background-color: #ffffff41; }
+		to { margin: 0rem; background-color: #ffffff7f; }
+	}
+
+	/* smaller question, answer, and category text */
+	.text-question {
+		margin-top: 0.5rem;
+		font-size: 1.25rem;
+	}
+	.text-answer {
+		font-size: 1.25rem;
+	}
+	.text-category {
+		font-size: 1rem;
+	}
+
+	/* less box padding */
+	.box {
+		padding: 1rem 1rem;
+	}
+}
+
+
+
+
+
+/*  ==========
+	  7. OTHER
+	==========  */
+
+/* starts off website on home page */
 .page-game {
 	display: none;
 }
