@@ -242,7 +242,7 @@ body {
 	background: linear-gradient(221deg, #d9ed92, #76c893, #168aad, #184e77);
 	background-size: 200% 200%;
 	background-attachment: fixed;
-	animation: bgGradient 10s ease-in-out infinite;
+	animation: bgGradient 30s ease-in-out infinite;
 }
 @keyframes bgGradient {
 	0% { background-position: 0% 50% }
