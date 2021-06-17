@@ -149,6 +149,10 @@ button {
 .text-points {
 	margin-top: 0.25rem;
 }
+.text-time {
+	font-weight: bold;
+	padding-top: 1rem;
+}
 
 /*  =================
 	  4. COMPONENTS

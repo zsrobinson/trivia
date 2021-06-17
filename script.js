@@ -21,6 +21,8 @@ let teams = {
 	teamB: { points: 0, name: "" },
 };
 
+let timer = 0;
+
 /*  ================
 	  2. FUNCTIONS
 	================  */
@@ -61,6 +63,8 @@ async function getData() {
 function newQuestion() {
 	hide("text-answer");
 	show("button-answer");
+	timer = 0;
+	document.getElementById("text-time").innerHTML = "0:00";
 	if (currentSet.length > 0) {
 		// if there are questions, update screen
 
@@ -93,6 +97,18 @@ function numToPoints(number) {
 		suffix = " points";
 	}
 	return number + suffix;
+}
+
+function stopwatch() {
+	sec = timer % 60;
+	min = Math.floor(timer / 60);
+	// add leading zero to seconds
+	if (sec < 10) {
+		sec = "0" + sec;
+	}
+	document.getElementById("text-time").innerHTML = `${min}:${sec}`;
+	timer++;
+	setTimeout(stopwatch, 1000)
 }
 
 /*  =================
@@ -209,6 +225,7 @@ document.getElementById("button-answer").addEventListener("click", function () {
 	============  */
 
 newQuestion();
+stopwatch();
 
 if (Math.floor(Math.random() * 2) == 0) {
 	currentTeam = "teamA";
