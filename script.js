@@ -1,3 +1,17 @@
+/*  =====================
+	  TABLE OF CONTENTS
+	=====================
+
+	1. VARIABLES
+	2. FUNCTIONS
+	3. ANIMATIONS
+	4. EVENT HANDLERS  
+	5. SETUP  */
+
+/*  ================
+	  1. VARIABLES
+	================  */
+
 let currentSet = {};
 let currentIndex;
 let currentTeam;
@@ -6,6 +20,10 @@ let teams = {
 	teamA: { points: 0, name: "" },
 	teamB: { points: 0, name: "" },
 };
+
+/*  ================
+	  2. FUNCTIONS
+	================  */
 
 async function getData() {
 	try {
@@ -77,7 +95,9 @@ function numToPoints(number) {
 	return number + suffix;
 }
 
-//CSS Animation functions
+/*  =================
+	  3. ANIMATIONS
+	=================  */
 
 function shrink(name) {
 	let target = document.getElementById(name);
@@ -107,19 +127,11 @@ function hide(name) {
 	target.style.display = "none";
 }
 
-/* function flyIn() {
-	let target = document.getElementsByClassName("question")[0]
-	try { target.classList.remove("flyOut"); }
-	finally { target.classList.add("flyIn"); }
-}
+/*  =====================
+	  4. EVENT HANDLERS
+	=====================  */
 
-function flyOut() {
-	let target = document.getElementsByClassName("question")[0]
-	try { target.classList.remove("flyIn"); }
-	finally { target.classList.add("flyOut"); }
-} */
-
-// correct button
+/* Correct Button */
 
 document.getElementById("button-large-correct").addEventListener("click", function () {
 	if (currentTeam == "teamA") {
@@ -135,19 +147,7 @@ document.getElementById("button-large-correct").addEventListener("click", functi
 	newQuestion();
 });
 
-// setup
-
-newQuestion();
-
-if (Math.floor(Math.random() * 2) == 0) {
-	currentTeam = "teamA";
-	shrink("box-team-b");
-} else {
-	currentTeam = "teamB";
-	shrink("box-team-a");
-}
-
-// wrong button
+/* Wrong Button */
 
 document.getElementById("button-large-wrong").addEventListener("click", function () {
 	newQuestion();
@@ -163,13 +163,13 @@ document.getElementById("button-large-wrong").addEventListener("click", function
 	}
 });
 
-// skip button
+/* Skip Button */
 
 document.getElementById("button-large-skip").addEventListener("click", function () {
 	newQuestion();
 });
 
-// start button
+/* Start Button */
 
 document.getElementById("button-setup-start").addEventListener("click", function () {
 	// get values from name inputs
@@ -197,7 +197,23 @@ document.getElementById("button-setup-start").addEventListener("click", function
 	document.getElementById("page-game").style.display = "grid";
 });
 
+/* Answer Button */
+
 document.getElementById("button-answer").addEventListener("click", function () {
 	show("text-answer");
 	hide("button-answer");
 });
+
+/*  ============
+	  5. SETUP
+	============  */
+
+newQuestion();
+
+if (Math.floor(Math.random() * 2) == 0) {
+	currentTeam = "teamA";
+	shrink("box-team-b");
+} else {
+	currentTeam = "teamB";
+	shrink("box-team-a");
+}
