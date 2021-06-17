@@ -22,9 +22,9 @@ I recently redesigned this project, making many fundamental changes. First, I st
 
 - A stopwatch in the corner of the screen to let players know how long they have spend on a question
 - More options to customize the game
-- CSS for more breakpoints (mobile friendly)
 - A win state, right now it just goes on forever
 - Support for multiple trivia databases
+- Crown next to the team with more points
 
 ## Credits
 

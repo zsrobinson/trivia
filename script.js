@@ -41,8 +41,8 @@ async function getData() {
 }
 
 function newQuestion() {
-	hide("answer");
-	show("answerButton");
+	hide("text-answer");
+	show("button-answer");
 	if (currentSet.length > 0) {
 		// if there are questions, update screen
 
@@ -50,10 +50,10 @@ function newQuestion() {
 
 		console.log(`Displaying question ${currentIndex}. There are ${currentSet.length-1} questions left.`)
 
-		document.getElementById("question").innerHTML = currentSet[currentIndex]["question"];
-		document.getElementById("answer").innerHTML = currentSet[currentIndex]["answer"];
-		document.getElementById("categoryText").innerHTML = currentSet[currentIndex]["category"].charAt(0).toUpperCase() + currentSet[currentIndex]["category"].slice(1);
-		document.getElementById("categoryIcon").src = "assets/categories/" + currentSet[currentIndex]["category"] + ".svg";
+		document.getElementById("text-question").innerHTML = currentSet[currentIndex]["question"];
+		document.getElementById("text-answer").innerHTML = currentSet[currentIndex]["answer"];
+		document.getElementById("text-category").innerHTML = currentSet[currentIndex]["category"].charAt(0).toUpperCase() + currentSet[currentIndex]["category"].slice(1);
+		document.getElementById("icon-category").src = "assets/categories/" + currentSet[currentIndex]["category"] + ".svg";
 
 		currentSet.splice(currentIndex, 1);
 
@@ -80,14 +80,14 @@ function numToPoints(number) {
 
 function shrink(name) {
 	let target = document.getElementById(name)
-	try { target.classList.remove("grow"); }
-	finally { target.classList.add("shrink"); }
+	try { target.classList.remove("box-grow"); }
+	finally { target.classList.add("box-shrink"); }
 }
 
 function grow(name) {
 	let target = document.getElementById(name)
-	try { target.classList.remove("shrink"); }
-	finally { target.classList.add("grow"); }
+	try { target.classList.remove("box-shrink"); }
+	finally { target.classList.add("box-grow"); }
 }
 
 function show(name) {
@@ -115,7 +115,7 @@ function flyOut() {
 
 // correct button
 
-document.getElementById("correctButton").addEventListener("click", function () {
+document.getElementById("button-large-correct").addEventListener("click", function () {
 	if (currentTeam == "teamA") {
 		teams.teamA.points++;
 	} else if (currentTeam == "teamB") {
@@ -123,8 +123,8 @@ document.getElementById("correctButton").addEventListener("click", function () {
 	}
 
 	// display team points
-	document.getElementById("teamAPoints").innerHTML = numToPoints(teams.teamA.points);
-	document.getElementById("teamBPoints").innerHTML = numToPoints(teams.teamB.points);
+	document.getElementById("text-points-team-a").innerHTML = numToPoints(teams.teamA.points);
+	document.getElementById("text-points-team-b").innerHTML = numToPoints(teams.teamB.points);
 
 	newQuestion();
 
@@ -138,28 +138,28 @@ newQuestion();
 
 if (Math.floor(Math.random()*2) == 0) {
 	currentTeam = "teamA";
-	shrink("teamB");
+	shrink("box-team-b");
 } else {
 	currentTeam = "teamB";
-	shrink("teamA");
+	shrink("box-team-a");
 }
 
 
 
 // wrong button
 
-document.getElementById("wrongButton").addEventListener("click", function () {
+document.getElementById("button-large-wrong").addEventListener("click", function () {
 
 	newQuestion();
 
 	if (currentTeam == "teamA") {
 		currentTeam = "teamB";
-		shrink("teamA");
-		grow("teamB");
+		shrink("box-team-a");
+		grow("box-team-b");
 	} else if (currentTeam == "teamB") {
 		currentTeam = "teamA";
-		shrink("teamB");
-		grow("teamA");
+		shrink("box-team-b");
+		grow("box-team-a");
 	}
 
 });
@@ -168,7 +168,7 @@ document.getElementById("wrongButton").addEventListener("click", function () {
 
 // skip button
 
-document.getElementById("skipButton").addEventListener("click", function () {
+document.getElementById("button-large-skip").addEventListener("click", function () {
 	newQuestion();
 });
 
@@ -176,7 +176,7 @@ document.getElementById("skipButton").addEventListener("click", function () {
 
 // start button
 
-document.getElementById("startButton").addEventListener("click", function () {
+document.getElementById("button-setup-start").addEventListener("click", function () {
 
 	// get values from name inputs
 	teams.teamA.name = document.getElementById("teamANameInput").value;
@@ -187,19 +187,19 @@ document.getElementById("startButton").addEventListener("click", function () {
 	if (teams.teamB.name == "") { teams.teamB.name = "Team B"; }
 
 	// display team points
-	document.getElementById("teamAPoints").innerHTML = numToPoints(teams.teamA.points);
-	document.getElementById("teamBPoints").innerHTML = numToPoints(teams.teamB.points);
+	document.getElementById("text-points-team-a").innerHTML = numToPoints(teams.teamA.points);
+	document.getElementById("text-points-team-b").innerHTML = numToPoints(teams.teamB.points);
 
 	// display team names
-	document.getElementById("teamAName").innerHTML = teams.teamA.name;
-	document.getElementById("teamBName").innerHTML = teams.teamB.name;
+	document.getElementById("header-team-a").innerHTML = teams.teamA.name;
+	document.getElementById("header-team-b").innerHTML = teams.teamB.name;
 
 	// switch screens
-	document.getElementsByClassName("setup")[0].style.display = "none";
-	document.getElementsByClassName("game")[0].style.display = "grid";
+	document.getElementById("page-home").style.display = "none";
+	document.getElementById("page-game").style.display = "grid";
 });
 
-document.getElementById("answerButton").addEventListener("click", function () {
-	show("answer");
-	hide("answerButton");
+document.getElementById("button-answer").addEventListener("click", function () {
+	show("text-answer");
+	hide("button-answer");
 });
