@@ -20,7 +20,6 @@ I recently redesigned this project, making many fundamental changes. First, I st
 
 ## What I Could Improve
 
-- A stopwatch in the corner of the screen to let players know how long they have spend on a question
 - More options to customize the game
 - A win state, right now it just goes on forever
 - Support for multiple trivia databases
