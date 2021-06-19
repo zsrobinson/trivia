@@ -19,7 +19,7 @@ let teams = {
 	teamA: { points: 0, name: "" },
 	teamB: { points: 0, name: "" },
 };
-let timer = 0;
+let stopwatchStartTime = 0;
 
 /*  ================
 	  2. FUNCTIONS
@@ -61,8 +61,8 @@ async function getData() {
 function newQuestion() {
 	hide("text-answer");
 	show("button-answer");
-	timer = 1;
-	document.getElementById("text-time").innerHTML = "0:00";
+	stopwatchReset();
+
 	if (currentSet.length > 0) {
 		// if there are questions, update screen
 
@@ -97,16 +97,25 @@ function numToPoints(number) {
 	return number + suffix;
 }
 
-function stopwatch() {
-	sec = timer % 60;
-	min = Math.floor(timer / 60);
-	// add leading zero to seconds
+function stopwatchReset() {
+	stopwatchStartTime = (new Date()).getTime();
+}
+
+function stopwatchLoop() {
+	//get time difference
+	const difference = (new Date()).getTime() - stopwatchStartTime
+	const differenceSec = Math.floor(difference/1000)
+
+	//calculate seconds and minutes for time
+	let sec = differenceSec % 60;
+	const min = Math.floor(differenceSec / 60);
 	if (sec < 10) {
 		sec = "0" + sec;
 	}
+
+	//update screen and repeat
 	document.getElementById("text-time").innerHTML = `${min}:${sec} seconds`;
-	timer++;
-	setTimeout(stopwatch, 1000);
+	setTimeout(stopwatchLoop, 100);
 }
 
 /*  =================
@@ -209,6 +218,8 @@ document.getElementById("button-setup-start").addEventListener("click", function
 	// switch screens
 	document.getElementById("page-home").style.display = "none";
 	document.getElementById("page-game").style.display = "grid";
+
+	stopwatchReset();
 });
 
 /* Answer Button */
@@ -223,7 +234,7 @@ document.getElementById("button-answer").addEventListener("click", function () {
 	============  */
 
 newQuestion();
-stopwatch();
+stopwatchLoop();
 
 if (Math.floor(Math.random() * 2) == 0) {
 	currentTeam = "teamA";
@@ -232,3 +243,5 @@ if (Math.floor(Math.random() * 2) == 0) {
 	currentTeam = "teamB";
 	shrink("box-team-a");
 }
+
+console.log((new Date()).getTime())
