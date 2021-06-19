@@ -98,13 +98,13 @@ function numToPoints(number) {
 }
 
 function stopwatchReset() {
-	stopwatchStartTime = (new Date()).getTime();
+	stopwatchStartTime = new Date().getTime();
 }
 
 function stopwatchLoop() {
 	//get time difference
-	const difference = (new Date()).getTime() - stopwatchStartTime
-	const differenceSec = Math.floor(difference/1000)
+	const difference = new Date().getTime() - stopwatchStartTime;
+	const differenceSec = Math.floor(difference / 1000);
 
 	//calculate seconds and minutes for time
 	let sec = differenceSec % 60;
@@ -243,5 +243,3 @@ if (Math.floor(Math.random() * 2) == 0) {
 	currentTeam = "teamB";
 	shrink("box-team-a");
 }
-
-console.log((new Date()).getTime())
