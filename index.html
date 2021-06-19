@@ -24,8 +24,14 @@
 				<label class="label label-setup" for="teamBNameInput">Team B name: </label>
 				<input class="input input-setup" name="teamBNameInput" id="teamBNameInput" autocomplete="off" type="text" />
 				<div class="columns">
-					<button class="button button-setup" id="button-setup-start">Start</button>
-					<button class="button button-setup" onclick="window.location.href='https://www.github.com/zsrobinson/trivia';">Learn More</button>
+					<button class="button button-setup" id="button-setup-start">
+						<img class="icon icon-small" src="assets\buttons\start.svg" />
+						<p>Start</p>
+					</button>
+					<button class="button button-setup" onclick="window.location.href='https://www.github.com/zsrobinson/trivia';">
+						<img class="icon icon-small" src="assets\buttons\github.svg" />
+						<p>View Project</p>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -33,7 +39,7 @@
 		<div class="page page-game" id="page-game">
 			<div class="box box-question">
 				<div class="columns columns-category">
-					<img class="icon icon-category" id="icon-category" src="assets/categories/general.svg" />
+					<img class="icon icon-small" id="icon-category" src="assets/categories/general.svg" />
 					<p class="text text-category" id="text-category"></p>
 				</div>
 
@@ -41,7 +47,10 @@
 			</div>
 
 			<div class="box box-answer">
-				<button class="button button-answer" id="button-answer">Reveal Answer</button>
+				<button class="button button-answer" id="button-answer">
+					<img class="icon icon-small" src="assets\buttons\reveal.svg" />
+					<p>Reveal Answer</p>
+				</button>
 				<p class="text text-answer" id="text-answer"></p>
 			</div>
 

@@ -142,7 +142,7 @@ function grow(name) {
 
 function show(name) {
 	let target = document.getElementById(name);
-	target.style.display = "block";
+	target.style.display = "flex";
 }
 
 function hide(name) {

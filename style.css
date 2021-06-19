@@ -167,6 +167,10 @@ button {
 	background-color: #ffffff75;
 	font-weight: bold;
 	transition: all ease-in-out 100ms;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 0.5rem 1rem;
 }
 .button:hover,
 .button:focus {
@@ -176,11 +180,8 @@ button {
 .button-setup {
 	margin-top: 0.5rem;
 	margin-right: 0.5rem;
-	padding: 0.25rem 1rem;
 }
-.button-answer {
-	padding: 0.5rem 2rem;
-}
+/* .button-answer {} */
 
 .button-large {
 	display: flex;
@@ -219,7 +220,7 @@ button {
 .icon {
 	filter: invert(15%) sepia(6%) saturate(6%) hue-rotate(316deg) brightness(101%) contrast(88%);
 }
-.icon-category {
+.icon-small {
 	width: 1.5rem;
 	margin-right: 0.5rem;
 }
