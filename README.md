@@ -1,6 +1,6 @@
 # Random Trivia Game
 
-Visit Project: https://zsrobinson.github.io/trivia/
+Visit Project: https://trivia.zsrobinson.com ([Alternate Link](https://zsrobinson.github.io/trivia/))
 
 ## About This Project
 
